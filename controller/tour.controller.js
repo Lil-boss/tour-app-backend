@@ -5,9 +5,24 @@ const {
 
 exports.getPackage = async (req, res) => {
   try {
-    const result = await getPackageService();
+    const filters = { ...req.query };
+    const excludeFields = ["sort", "page", "limit", "fields"];
+    const queries = {};
 
-    res.status(201).json({
+    if (req.query.sort) {
+      const sortBy = req.query.sort.split(",").join(" ");
+      queries.sortBy = sortBy;
+    }
+
+    if (req.query.fields) {
+      const fields = req.query.fields.split(",").join(" ");
+      queries.fields = fields;
+    }
+
+    excludeFields.forEach((field) => delete filters[field]);
+    const result = await getPackageService(filters, queries);
+
+    res.status(200).json({
       status: "success",
       data: result,
     });
