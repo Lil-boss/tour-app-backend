@@ -8,14 +8,18 @@ exports.getPackageService = async (filters, queries) => {
     .sort(queries.sortBy);
   return result;
 };
-
-module.exports.CreatePackageService = async (data) => {
+exports.getDetails = async (tourId) => {
+  const result = await PackageModel.findById(tourId);
+  // console.log(result);
+  return result;
+};
+exports.CreatePackageService = async (data) => {
   const postData = new PackageModel(data);
   const result = await postData.save();
   return result;
 };
 
-module.exports.UpdatePackageService = async (tourId, data) => {
+exports.UpdatePackageService = async (tourId, data) => {
   const result = await PackageModel.updateOne(
     { _id: tourId },
     { $set: data },

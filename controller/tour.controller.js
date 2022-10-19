@@ -2,6 +2,7 @@ const {
   CreatePackageService,
   getPackageService,
   UpdatePackageService,
+  getDetails,
 } = require("../service/tour.service");
 
 exports.getPackage = async (req, res) => {
@@ -41,6 +42,22 @@ exports.getPackage = async (req, res) => {
   }
 };
 
+exports.getDetails = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const details = await getDetails(id);
+    res.status(200).json({
+      status: "success",
+      data: details,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Data find to Failed",
+      error: error.message,
+    });
+  }
+};
+
 exports.CreatePackage = async (req, res) => {
   try {
     const result = await CreatePackageService(req.body);
@@ -60,7 +77,7 @@ exports.CreatePackage = async (req, res) => {
 
 exports.UpdatePackage = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.params.id;
     const packageUpdate = await UpdatePackageService(id, req.body);
 
     res.status(200).json({

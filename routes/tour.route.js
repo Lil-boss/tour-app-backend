@@ -7,6 +7,8 @@ router
   .get(tourController.getPackage)
   .post(tourController.CreatePackage);
 
+router.route("/tours/:id").get(tourController.getDetails);
+
 router.route("/tour/:id").patch(tourController.UpdatePackage);
 
 module.exports = router;
