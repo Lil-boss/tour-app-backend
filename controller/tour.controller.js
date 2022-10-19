@@ -1,12 +1,12 @@
 const {
-  CreatePackageService,
-  getPackageService,
-  UpdatePackageService,
-  getDetails,
-  getPackageTrending,
+  getTourService,
+  CreateTourService,
+  UpdateTourService,
+  getTourDetails,
+  getTourTrending,
 } = require("../service/tour.service");
 
-exports.getPackage = async (req, res) => {
+exports.getTour = async (req, res) => {
   try {
     const filters = { ...req.query };
     const excludeFields = ["sort", "page", "limit", "fields"];
@@ -29,39 +29,39 @@ exports.getPackage = async (req, res) => {
     }
 
     excludeFields.forEach((field) => delete filters[field]);
-    const result = await getPackageService(filters, queries);
+    const result = await getTourService(filters, queries);
 
     res.status(200).json({
       status: "success",
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       status: "Data find to Failed",
       error: error.message,
     });
   }
 };
 
-exports.getDetails = async (req, res) => {
+exports.tourDetails = async (req, res) => {
   try {
     const { id } = req.params;
-    const details = await getDetails(id);
+    const details = await getTourDetails(id);
     res.status(200).json({
       status: "success",
       data: details,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       status: "Data find to Failed",
       error: error.message,
     });
   }
 };
 
-exports.CreatePackage = async (req, res) => {
+exports.CreateTour = async (req, res) => {
   try {
-    const result = await CreatePackageService(req.body);
+    const result = await CreateTourService(req.body);
 
     res.status(201).json({
       status: "success",
@@ -69,17 +69,17 @@ exports.CreatePackage = async (req, res) => {
       data: result,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       status: "Data Insert Failed",
       error: error.message,
     });
   }
 };
 
-exports.UpdatePackage = async (req, res) => {
+exports.UpdateTour = async (req, res) => {
   try {
     const { id } = req.params.id;
-    const packageUpdate = await UpdatePackageService(id, req.body);
+    const packageUpdate = await UpdateTourService(id, req.body);
 
     res.status(200).json({
       status: "success",
@@ -87,7 +87,7 @@ exports.UpdatePackage = async (req, res) => {
       data: packageUpdate,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       status: "Data Update Failed",
       error: error.message,
     });
@@ -96,14 +96,14 @@ exports.UpdatePackage = async (req, res) => {
 
 exports.getToursTrending = async (req, res) => {
   try {
-    const data = await getPackageTrending();
+    const data = await getTourTrending();
     res.status(200).json({
       status: "success",
       message: "Data Update success",
       data: data,
     });
   } catch (error) {
-    res.status(500).json({
+    res.status(404).json({
       status: "Failed",
       error: error.message,
     });

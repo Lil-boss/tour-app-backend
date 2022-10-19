@@ -3,7 +3,7 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 const dotenv = require("dotenv");
-const createPackage = require("./routes/tour.route");
+const routes = require("./routes/tour.route");
 dotenv.config();
 
 database();
@@ -15,7 +15,7 @@ app.get("/", (req, res) => {
   res.send("Home page");
 });
 
-app.use("/api/v1", createPackage);
+app.use("/api/v1", routes);
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => console.log(`Server started on port ${port}`));

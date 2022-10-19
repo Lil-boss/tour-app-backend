@@ -4,12 +4,12 @@ const router = require("express").Router();
 
 router
   .route("/tours")
-  .get(tourController.getPackage)
-  .post(tourController.CreatePackage);
+  .get(tourController.getTour)
+  .post(tourController.CreateTour);
 
-router.route("/tours/:id").get(tourController.getDetails);
+router.route("/tours/:id").get(tourController.tourDetails);
 
-router.route("/tour/:id").patch(tourController.UpdatePackage);
+router.route("/tour/:id").patch(tourController.UpdateTour);
 
 router.route("/tour/trending").get(tourController.getToursTrending);
 

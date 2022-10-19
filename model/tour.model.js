@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const packageSchema = new mongoose.Schema(
+const tourSchema = new mongoose.Schema(
   {
     packageName: {
       type: String,
@@ -34,4 +34,4 @@ const packageSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("TourPackage", packageSchema);
+module.exports = mongoose.model("TourPackage", tourSchema);
