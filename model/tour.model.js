@@ -12,17 +12,23 @@ const packageSchema = new mongoose.Schema(
     description: {
       type: String,
       required: true,
+      data: Buffer,
+      contentType: String,
     },
     price: {
       type: Number,
       required: true,
       min: [0, "Price can't be negative"],
     },
-    // img: {
-    //   data: Buffer,
-    //   contentType: String,
-    // },
+    img: {
+      type: String,
+      required: true,
+    },
+    viewed: {
+      type: Number,
+    },
   },
+
   {
     timestamps: true,
   }

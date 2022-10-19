@@ -1,6 +1,7 @@
 const {
   CreatePackageService,
   getPackageService,
+  UpdatePackageService,
 } = require("../service/tour.service");
 
 exports.getPackage = async (req, res) => {
@@ -48,6 +49,24 @@ exports.CreatePackage = async (req, res) => {
       status: "success",
       message: "Data insert success",
       data: result,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Data Insert Failed",
+      error: error.message,
+    });
+  }
+};
+
+exports.UpdatePackage = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const packageUpdate = await UpdatePackageService(id, req.body);
+
+    res.status(200).json({
+      status: "success",
+      message: "Data Update success",
+      data: packageUpdate,
     });
   } catch (error) {
     res.status(500).json({

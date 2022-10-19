@@ -14,3 +14,12 @@ module.exports.CreatePackageService = async (data) => {
   const result = await postData.save();
   return result;
 };
+
+module.exports.UpdatePackageService = async (tourId, data) => {
+  const result = await PackageModel.updateOne(
+    { _id: tourId },
+    { $set: data },
+    { runValidators: true }
+  );
+  return result;
+};
