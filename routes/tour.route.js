@@ -11,4 +11,6 @@ router.route("/tours/:id").get(tourController.getDetails);
 
 router.route("/tour/:id").patch(tourController.UpdatePackage);
 
+router.route("/tour/trending").get(tourController.getToursTrending);
+
 module.exports = router;

@@ -3,6 +3,7 @@ const {
   getPackageService,
   UpdatePackageService,
   getDetails,
+  getPackageTrending,
 } = require("../service/tour.service");
 
 exports.getPackage = async (req, res) => {
@@ -87,7 +88,23 @@ exports.UpdatePackage = async (req, res) => {
     });
   } catch (error) {
     res.status(500).json({
-      status: "Data Insert Failed",
+      status: "Data Update Failed",
+      error: error.message,
+    });
+  }
+};
+
+exports.getToursTrending = async (req, res) => {
+  try {
+    const data = await getPackageTrending();
+    res.status(200).json({
+      status: "success",
+      message: "Data Update success",
+      data: data,
+    });
+  } catch (error) {
+    res.status(500).json({
+      status: "Failed",
       error: error.message,
     });
   }

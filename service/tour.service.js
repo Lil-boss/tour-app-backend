@@ -27,3 +27,8 @@ exports.UpdatePackageService = async (tourId, data) => {
   );
   return result;
 };
+
+exports.getPackageTrending = async () => {
+  const data = await PackageModel.find({}).sort({ price: 1 }).limit(3);
+  return data;
+};
