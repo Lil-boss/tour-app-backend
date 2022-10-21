@@ -12,7 +12,6 @@ exports.getTourService = async (filters, queries) => {
 
 exports.getTourDetails = async (tourId) => {
   const result = await tourModel.findById(tourId);
-  // console.log(result);
   return result;
 };
 
