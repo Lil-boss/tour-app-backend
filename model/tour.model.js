@@ -26,6 +26,7 @@ const tourSchema = new mongoose.Schema(
     },
     viewed: {
       type: Number,
+      default: 0,
     },
   },
 

@@ -12,6 +12,15 @@ exports.getTourService = async (filters, queries) => {
 
 exports.getTourDetails = async (tourId) => {
   const result = await tourModel.findById(tourId);
+  if (result.viewed === null) {
+    const count = new result({
+      viewed: 1,
+    });
+    count.save();
+  } else {
+    result.viewed += 1;
+    result.save();
+  }
   return result;
 };
 
