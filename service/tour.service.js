@@ -1,5 +1,6 @@
 const tourModel = require("../model/tour.model");
 
+//get All tour package
 exports.getTourService = async (filters, queries) => {
   const result = await tourModel
     .find(filters)
@@ -10,6 +11,7 @@ exports.getTourService = async (filters, queries) => {
   return result;
 };
 
+//get tour by Id
 exports.getTourDetails = async (tourId) => {
   const result = await tourModel.findById(tourId);
   if (result.viewed === null) {
@@ -24,12 +26,14 @@ exports.getTourDetails = async (tourId) => {
   return result;
 };
 
+//create tour package
 exports.CreateTourService = async (data) => {
   const postData = new tourModel(data);
   const result = await postData.save();
   return result;
 };
 
+//update tour package
 exports.UpdateTourService = async (tourId, data) => {
   const result = await tourModel.updateOne(
     { _id: tourId },
@@ -39,12 +43,14 @@ exports.UpdateTourService = async (tourId, data) => {
   return result;
 };
 
-exports.getCheapestTour = async () => {
-  const data = await tourModel.find({}).sort({ price: 1 }).limit(3);
+//treading tour
+exports.getTrendingTour = async () => {
+  const data = await tourModel.find({}).sort({ viewed: -1 }).limit(3);
   return data;
 };
 
-exports.getTrendingTour = async () => {
-  const data = await tourModel.find({}).sort({ viewed: -1 }).limit(3);
+//cheapest tour package
+exports.getCheapestTour = async () => {
+  const data = await tourModel.find({}).sort({ price: 1 }).limit(3);
   return data;
 };

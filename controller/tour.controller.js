@@ -7,6 +7,7 @@ const {
   getTrendingTour,
 } = require("../service/tour.service");
 
+//get all tour controller
 exports.getTour = async (req, res) => {
   try {
     const filters = { ...req.query };
@@ -44,6 +45,7 @@ exports.getTour = async (req, res) => {
   }
 };
 
+//tour details controller
 exports.tourDetails = async (req, res) => {
   try {
     const { id } = req.params;
@@ -60,6 +62,7 @@ exports.tourDetails = async (req, res) => {
   }
 };
 
+//create tour package controller
 exports.CreateTour = async (req, res) => {
   try {
     const result = await CreateTourService(req.body);
@@ -77,6 +80,7 @@ exports.CreateTour = async (req, res) => {
   }
 };
 
+//update tour package controller
 exports.UpdateTour = async (req, res) => {
   try {
     const { id } = req.params.id;
@@ -95,6 +99,7 @@ exports.UpdateTour = async (req, res) => {
   }
 };
 
+//trending tour package controller
 exports.getTrendingTour = async (req, res) => {
   try {
     const data = await getTrendingTour();
@@ -111,6 +116,7 @@ exports.getTrendingTour = async (req, res) => {
   }
 };
 
+//cheapest tour package controller
 exports.getCheapestTour = async (req, res) => {
   try {
     const data = await getCheapestTour();
