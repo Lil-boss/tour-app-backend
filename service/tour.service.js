@@ -39,7 +39,12 @@ exports.UpdateTourService = async (tourId, data) => {
   return result;
 };
 
-exports.getTourTrending = async () => {
+exports.getCheapestTour = async () => {
   const data = await tourModel.find({}).sort({ price: 1 }).limit(3);
+  return data;
+};
+
+exports.getTrendingTour = async () => {
+  const data = await tourModel.find({}).sort({ viewed: -1 }).limit(3);
   return data;
 };
